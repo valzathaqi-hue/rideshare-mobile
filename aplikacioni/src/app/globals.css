@@ -49,3 +49,23 @@ main {
   cursor: default;
 }
 
+.panel-form {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid #8090aa;
+  border-radius: 12px;
+}
+
+.panel-form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.panel-form input[type="time"] {
+  display: block;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 8px;
+  font: inherit;
+}
+

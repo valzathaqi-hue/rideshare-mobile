@@ -14,6 +14,50 @@ npm run dev
 
 Hap adresën që shfaq terminali, zakonisht http://localhost:3000.
 
+## Java 5 · Hyrja me GitHub dhe lejet
+
+Lista mbetet publike. Lidhja **Hyr / Paneli im** hap `/panel`. Përdoruesi i ri merr rolin `udhetar`; vetëm shoferi pronar i udhëtimit mund ta ndryshojë orën. Serveri kontrollon sesionin, rolin, fushat dhe pronarin në çdo ruajtje.
+
+Përgatit së pari Neon sipas Javës 4 më poshtë. Pastaj:
+
+1. Në GitHub → Settings → Developer settings → OAuth Apps → New OAuth App krijo aplikacionin tënd. Homepage URL: `http://localhost:3000`; callback: `http://localhost:3000/api/auth/callback/github`.
+2. Në `aplikacioni/.env.local` mbaj `DATABASE_URL` dhe shto vlerat private të aplikacionit OAuth dhe sekretin e sesionit:
+
+   ```dotenv
+   GITHUB_ID="CLIENT_ID_I_OAUTH_APP"
+   GITHUB_SECRET="CLIENT_SECRET_I_OAUTH_APP"
+   NEXTAUTH_SECRET="SEKRETI_YT_I_RASTESISHEM"
+   NEXTAUTH_URL="http://localhost:3000"
+   ```
+
+   Për të gjeneruar sekretin vetëm në kompjuterin tënd:
+
+   ```bash
+   node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
+   ```
+
+3. Ekzekuto `aplikacioni/schema-java05.sql` në të njëjtën databazë Neon si `schema.sql`. Shton profilet, rolet dhe pronarin fiktiv të ID 1; nuk fshin udhëtimet.
+4. Rinis serverin dhe hap `http://localhost:3000/panel`. Hyr me GitHub. Profili i parë është `udhetar`. Kopjo **ID ime GitHub** nga paneli.
+5. Në Neon SQL Editor zëvendëso `SHENO_ID_TENDE` me atë numër dhe ekzekuto:
+
+   ```sql
+   UPDATE profilet SET roli = 'shofer' WHERE github_id = 'SHENO_ID_TENDE';
+   UPDATE udhetimet SET shofer_id = 'SHENO_ID_TENDE' WHERE id = '2';
+   SELECT id, ora, shofer_id FROM udhetimet ORDER BY id;
+   ```
+
+   Caktimi i rolit bëhet nga pronari i databazës në laborator; përdoruesi nuk zgjedh rol në formular.
+
+Nëse ndryshon portin, përdor të njëjtën adresë te Homepage, callback dhe `NEXTAUTH_URL`. Mos përziej `localhost` me `127.0.0.1`. NextAuth është versioni `4.24.15`, sipas ushtrimit.
+
+Tri provat e Javës 5:
+
+1. Hyr, rifresko panelin dhe dil. Kontrollo që sesioni ruhet pas rifreskimit dhe mbyllet pas daljes.
+2. Si pronar i ID 2 ruaj 08:25. Kontrollo panelin, listën, detajet dhe Neon; pastaj rikthe 08:15.
+3. Në DevTools ndrysho përkohësisht ID-në e fshehtë nga 2 në 1 dhe dërgo formularin. Duhet të refuzohet dhe ID 1 të mbetet 08:00. Rifresko panelin pas provës.
+
+Rezultatet e kryera dhe ato që presin konfigurimin privat shënohen te `java-05.md`. Mos publiko sekrete ose pamje të `.env.local`.
+
 ## Java 4 · Neon dhe PostgreSQL
 
 Udhëtimet tani lexohen nga tabela `udhetimet` në Neon. Lista, detajet dhe kërkesa përdorin të njëjtën databazë. Pas ndryshimit të të dhënave në SQL Editor, rifresko faqen për të parë ndryshimin.
@@ -42,9 +86,9 @@ Në Vercel përdor **Root Directory: aplikacioni** dhe shto `DATABASE_URL` te En
 - `/udhetimi/3` ka zero vende dhe buton të çaktivizuar.
 - `/udhetimi/99` shfaq **Udhëtimi nuk u gjet** dhe lidhjen për te lista.
 
-Kërkesa është vetëm simulim. Nuk ka rezervim real, databazë, hyrje përdoruesi ose pagesa.
+Kërkesa për vend mbetet simulim, pa rezervim real ose pagesa. Versioni aktual shton Neon dhe hyrjen me GitHub.
 
-Kodi është në `aplikacioni/src/`. Raportet `java-02.md`, `java-03.md` dhe `java-04.md` ruhen këtu, pranë README-së. Rezultatet e Javës 3 përshkruajnë versionin e asaj jave; versioni aktual kërkon Neon.
+Kodi është në `aplikacioni/src/`. Raportet `java-02.md`, `java-03.md`, `java-04.md` dhe `java-05.md` ruhen këtu, pranë README-së. Raportet e mëparshme përshkruajnë versionet e atyre javëve.
 
 ## Kontrolli
 
