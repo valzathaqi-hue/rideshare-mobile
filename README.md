@@ -14,6 +14,23 @@ npm run dev
 
 Hap adresën që shfaq terminali, zakonisht http://localhost:3000.
 
+## Java 6 · PWA dhe lista offline
+
+Manifesti është te `/manifest.webmanifest`; ikonat janë PNG 192×192 dhe 512×512. Ikonat u morën nga [materiali i profesorit për Javën 6](https://arbenl.github.io/lendet/2026-2027/mobile/java-06/ushtrimet.html).
+
+Lidhja **Lista për lexim pa internet** shfaqet në çdo faqe, edhe kur databaza nuk lidhet. Lexuesi `/offline.html` punon si dokument më vete, pa asetet e Next.js. Butoni i rezervimit është i çaktivizuar.
+
+Service worker-i `/sw.js` ruan vetëm dokumentin offline, dy ikonat dhe përgjigjen publike të `/api/udhetimet` në `rideshare-public-v1`. Për listën provon rrjetin, pastaj kopjen lokale; shfaqen burimi dhe koha e ruajtjes. Paneli, hyrja, sesionet dhe POST nuk ruhen ose ridërgohen.
+
+Për provën e plotë duhet të punojë më parë lidhja Neon e Javës 4. Pa vizitë online dhe listë të lexuar me sukses nuk ka tri udhëtime për t'u shfaqur offline.
+
+1. Nis aplikacionin në `localhost` ose publikoje me HTTPS. Për një provë të qëndrueshme mund të përdorësh `npm run build` dhe pastaj `npm start` nga `aplikacioni/`.
+2. Hap faqen kryesore online. Në DevTools → Application → Service Workers kontrollo `/sw.js`; te Cache Storage → `rideshare-public-v1` gjej `/api/udhetimet`. Hap lexuesin dhe kontrollo tri kartat dhe kohën.
+3. Vetëm te tab-i RideShare aktivizo Network → Offline. Hap `/` dhe rifresko. Duhet të shfaqet dokumenti offline, tri kartat dhe koha e kopjes. Kontrollo edhe në 375 px.
+4. Në tab-in online të Neon ndrysho orën e ID 2 në 08:25. Kopja offline mbetet me orën e vjetër. Rikthe rrjetin te RideShare dhe kliko **Rifresko listën**. Kontrollo orën e re, burimin server dhe kohën e re. Në fund rikthe 08:15 në Neon dhe rifresko përsëri.
+
+Një adresë HTTP me IP të rrjetit lokal zakonisht nuk lejon service worker. Hap fillimisht aplikacionin kryesor, që komponenti `Pwa` të regjistrojë worker-in dhe të kërkojë listën publike. Rezultatet dhe kufizimet e kontrollit janë te `java-06.md`.
+
 ## Java 5 · Hyrja me GitHub dhe lejet
 
 Lista mbetet publike. Lidhja **Hyr / Paneli im** hap `/panel`. Përdoruesi i ri merr rolin `udhetar`; vetëm shoferi pronar i udhëtimit mund ta ndryshojë orën. Serveri kontrollon sesionin, rolin, fushat dhe pronarin në çdo ruajtje.
@@ -88,7 +105,7 @@ Në Vercel përdor **Root Directory: aplikacioni** dhe shto `DATABASE_URL` te En
 
 Kërkesa për vend mbetet simulim, pa rezervim real ose pagesa. Versioni aktual shton Neon dhe hyrjen me GitHub.
 
-Kodi është në `aplikacioni/src/`. Raportet `java-02.md`, `java-03.md`, `java-04.md` dhe `java-05.md` ruhen këtu, pranë README-së. Raportet e mëparshme përshkruajnë versionet e atyre javëve.
+Kodi Next.js është në `aplikacioni/src/`; worker-i, lexuesi offline dhe ikonat janë në `aplikacioni/public/`. Raportet `java-02.md` deri te `java-06.md` ruhen këtu, pranë README-së. Raportet e mëparshme përshkruajnë versionet e atyre javëve.
 
 ## Kontrolli
 
