@@ -115,3 +115,15 @@ main {
   outline-offset: 3px;
 }
 
+.favorite-trip {
+  padding: 14px;
+  border: 1px solid #8090aa;
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+
+.favorite-trip .trip-card {
+  padding: 0;
+  border: 0;
+}
+

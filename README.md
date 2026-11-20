@@ -2,6 +2,17 @@
 
 Projekt universitar në Next.js me App Router. Vazhdon idenë dhe skicën e Javës 2.
 
+## Java 9 · Udhëtimet e preferuara
+
+Në listë, përdoruesi i kyçur mund të ruajë një udhëtim personalisht. Ylli dhe numri ndryshojnë menjëherë me **Po ruhet…**; suksesi konfirmohet nga serveri. Refuzimi rikthen pamjen e mëparshme. Preferimi lexohet nga Neon pas rifreskimit dhe nuk rezervon vend. Çelësi i përbërë `(github_id, udhetimi_id)` pengon kopjet.
+
+1. Përgatit Neon dhe hyrjen me GitHub sipas Javëve 4–5 më poshtë. Në të njëjtën databazë ekzekuto `aplikacioni/schema-java09.sql`, pas `schema.sql` dhe `schema-java05.sql`.
+2. Nis serverin, hyr nga `/panel`, pastaj kthehu te lista dhe ruaj një udhëtim ende të paruajtur. Prit konfirmimin dhe rifresko. Kontrollo rreshtin përkatës në tabelën `preferimet` të Neon.
+3. Për një refuzim të kontrolluar, shto privatisht `PREFERIME_REFUZO_PROVEN=1` te `aplikacioni/.env.local` dhe rinis **npm run dev**. Provo një udhëtim të paruajtur; ylli dhe numri duhet të rikthehen. Hiqe flamurin, rinis dhe provo sërish. Ky flamur funksionon vetëm në zhvillim, pas kontrollit të sesionit dhe para shkrimit në databazë.
+4. Provo klikime të shpejta dhe përsërit të njëjtën ruajtje. Në Neon duhet të ketë vetëm një rresht për çiftin përdorues–udhëtim. Një llogari tjetër duhet të lexojë preferimet e veta.
+
+Raporti [java-09.md](java-09.md) dallon kontrollet e kaluara me PostgreSQL lokal nga provat që mbeten me Neon dhe OAuth real. Heqja e preferimeve nuk është përfshirë. Për dorëzim përdor linkun kryesor të repository-t dhe zgjidh Java 9; Push-i nuk hap Issue.
+
 ## Java 8 · Vendtakimi në telefon
 
 Te detajet e udhëtimit mund të shkruash vendtakimin dhe ta konfirmosh lokalisht. Butoni **Përdor vendndodhjen time** kërkon leje vetëm pas klikimit dhe shfaq saktësinë ose arsyen e dështimit. Fusha manuale mbetet aktive. Vendtakimi nuk i dërgohet shoferit dhe humbet pas rifreskimit.

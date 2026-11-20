@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { KartaUdhetimi } from "@/components/KartaUdhetimi";
+import UdhetimetMePreferime from "@/components/UdhetimetMePreferime";
 import { lexoUdhetimet, type Udhetim } from "@/lib/udhetimet";
+import { lexoPreferimet, type GjendjaPreferimeve } from "@/lib/preferimet";
 
 // Lexo të dhënat përsëri kur faqja hapet ose rifreskohet.
 export const dynamic = "force-dynamic";
@@ -22,6 +23,13 @@ export default async function Home() {
     );
   }
 
+  let preferimet: GjendjaPreferimeve;
+  try {
+    preferimet = await lexoPreferimet();
+  } catch {
+    preferimet = { perdoruesi: null, ids: [], gabim: "Preferimet nuk mund të lexohen tani." };
+  }
+
   return (
     <main>
       <h1>RideShare · Udhëtimet për AAB</h1>
@@ -31,11 +39,11 @@ export default async function Home() {
       {udhetimet.length === 0 ? (
         <p>Nuk ka udhëtime për momentin.</p>
       ) : (
-        <div className="trip-list">
-          {udhetimet.map((udhetim) => (
-            <KartaUdhetimi key={udhetim.id} udhetim={udhetim} />
-          ))}
-        </div>
+        <UdhetimetMePreferime
+          key={`${preferimet.perdoruesi ?? "publik"}:${preferimet.ids.join(",")}:${preferimet.gabim ?? ""}`}
+          udhetimet={udhetimet}
+          fillimi={preferimet}
+        />
       )}
     </main>
   );
