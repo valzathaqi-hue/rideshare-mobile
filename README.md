@@ -2,6 +2,12 @@
 
 Projekt universitar në Next.js me App Router. Vazhdon idenë dhe skicën e Javës 2.
 
+## Java 7 · Provo, korrigjo dhe shpjego
+
+Rasti i zgjedhur është **Rasti 3 · Klikim apo rezervim**, me kodin personal **P7-904**. Në detajet e udhëtimit, lidhja tani thotë **Provo kërkesën · simulim** dhe shpjegon përpara klikimit se nuk rezervohet vend ose njoftohet shoferi. Kontrolli për zero vende mbetet aktiv.
+
+Raporti [java-07.md](java-07.md) përmban dy problemet, korrigjimin, lidhjet Para/Pas dhe rezultatet e kontrolleve. Lint, build dhe kontrollet e izoluara kaluan. Provat HTTP të rrjedhës u bllokuan nga mungesa e konfigurimit Neon; provat reale në shfletues dhe pjesët personale të ushtrimit mbeten për përfundim. Push-i nuk e zëvendëson dorëzimin me Issue.
+
 ## Nisja e aplikacionit
 
 Në terminal, nga dosja e repository-t:
