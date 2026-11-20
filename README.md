@@ -2,6 +2,12 @@
 
 Projekt universitar në Next.js me App Router. Vazhdon idenë dhe skicën e Javës 2.
 
+## Java 8 · Vendtakimi në telefon
+
+Te detajet e udhëtimit mund të shkruash vendtakimin dhe ta konfirmosh lokalisht. Butoni **Përdor vendndodhjen time** kërkon leje vetëm pas klikimit dhe shfaq saktësinë ose arsyen e dështimit. Fusha manuale mbetet aktive. Vendtakimi nuk i dërgohet shoferit dhe humbet pas rifreskimit.
+
+Për provë pa Neon ose hyrje, hap **/java-08-test**. Kjo faqe përdor të njëjtin komponent si detajet, me udhëtim fiktiv. Konfigurimi `mobile-week08.json` gjendet në rrënjë. Raporti [java-08.md](java-08.md) dokumenton kontrollet me vendndodhje të simuluar dhe kufizimet. Provat lokale nuk janë raportet e botit: pas Push-it, dorëzo linkun kryesor të repository-t në formularin e Javës 8 dhe lexo të dy komentet në Issue.
+
 ## Java 7 · Provo, korrigjo dhe shpjego
 
 Rasti i zgjedhur është **Rasti 3 · Klikim apo rezervim**, me kodin personal **P7-904**. Në detajet e udhëtimit, lidhja tani thotë **Provo kërkesën · simulim** dhe shpjegon përpara klikimit se nuk rezervohet vend ose njoftohet shoferi. Kontrolli për zero vende mbetet aktiv.

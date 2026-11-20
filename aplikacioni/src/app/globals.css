@@ -75,3 +75,43 @@ main {
   font: inherit;
 }
 
+.meeting {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid #8090aa;
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+
+.meeting label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.meeting input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  font: inherit;
+  border: 1px solid #8090aa;
+  border-radius: 8px;
+}
+
+.meeting [role="alert"] {
+  color: #ffb8b8;
+}
+
+.meeting [data-testid="confirmed-meeting"] {
+  font-weight: 700;
+}
+
+.meeting [data-testid="confirmed-meeting"]:empty::before {
+  content: "Ende pa vendtakim të konfirmuar.";
+  font-weight: 400;
+}
+
+.action:focus-visible, .meeting input:focus-visible {
+  outline: 3px solid #89ddff;
+  outline-offset: 3px;
+}
+

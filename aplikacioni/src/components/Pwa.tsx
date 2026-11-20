@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Pwa() {
+  const pathname = usePathname();
   useEffect(() => {
+    if (pathname === "/java-08-test") return;
     if (!("serviceWorker" in navigator)) return;
     let cancelled = false;
 
@@ -25,7 +28,9 @@ export default function Pwa() {
       cancelled = true;
       navigator.serviceWorker.removeEventListener("controllerchange", warmSnapshot);
     };
-  }, []);
+  }, [pathname]);
+
+  if (pathname === "/java-08-test") return null;
 
   return (
     <aside className="pwa-info">
