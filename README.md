@@ -2,6 +2,21 @@
 
 Projekt universitar në Next.js me App Router. Vazhdon idenë dhe skicën e Javës 2.
 
+## Java 10 · Dy ekrane, një gjendje
+
+Shtova kërkesën reale dhe pranimin te detajet e udhëtimit. E rilexoj gjendjen rreth çdo 5 sekonda, pa lexime të mbivendosura. Në ndërprerje ruaj pamjen e fundit me paralajmërim; pas rilidhjes e rilexoj menjëherë. Pranimin dhe uljen e vendeve i ruaj së bashku në PostgreSQL, me kontroll të pronarit dhe pa ulje të përsëritur.
+
+Për provën me llogaritë e mia të testimit:
+
+1. Konfiguroj Neon dhe GitHub sipas Javëve 4–5 dhe ekzekutoj `aplikacioni/schema-java10.sql` pas `schema.sql` e `schema-java05.sql`. Migrimin mund ta ekzekutoj përsëri; nuk mbush të dhëna personale ose ndryshon vendet e udhëtimeve ekzistuese.
+2. Përgatis dy udhëtime fiktive me 2 vende e pa kërkesa të pranuara: ID 2 për kërkesën/pranimin dhe ID 1 për rilidhjen. Si pronar i databazës caktoj `shofer_id` dhe rolin `shofer` për llogarinë time të shoferit; llogarinë tjetër e mbaj `udhetar`. Nuk ndaj fjalëkalime dhe nuk përdor të dhëna reale.
+3. Hap `/udhetimi/2` në një dritare normale dhe një private me dy sesione të ndara. Dërgoj kërkesën si udhëtar dhe e pranoj si shofer. Të dy ekranet duhet të kalojnë nga 2 vende në 1 pa Refresh; përsëritja e pranimit nuk duhet ta ulë numrin përsëri.
+4. Te ID 1 nis me një kërkesë të re në pritje. Vendos vetëm dritaren e udhëtarit në DevTools → Network → Offline, pranoj nga shoferi dhe rikthej No throttling te udhëtari. Kontrolloj pamjen e vjetër me paralajmërim, pastaj përditësimin automatik pas rilidhjes.
+
+E lexoj gjendjen personale në `GET /api/udhetimet/{id}/gjendja`; në të njëjtën rrugë dërgoj POST me `veprimi: "kerko"` ose `veprimi: "prano"` dhe `kerkesaId`. Identitetin nuk e dërgoj nga telefoni: e merr serveri nga sesioni. Lidhjen e vjetër `/udhetimi/{id}/kerkesa` e ridrejtoj te detajet, pa krijuar kërkesë përmes GET-it.
+
+Te [java-10.md](java-10.md) dokumentova tri provat lokale dhe kufizimin: ende duhet t'i përsëris me Neon e OAuth real. Për dorëzim përdor linkun kryesor të repository-t dhe zgjedh Java 10; pas krijimit të Issue-t lexoj përgjigjen e botit.
+
 ## Java 9 · Udhëtimet e preferuara
 
 Në listë, përdoruesi i kyçur mund të ruajë një udhëtim personalisht. Ylli dhe numri ndryshojnë menjëherë me **Po ruhet…**; suksesi konfirmohet nga serveri. Refuzimi rikthen pamjen e mëparshme. Preferimi lexohet nga Neon pas rifreskimit dhe nuk rezervon vend. Çelësi i përbërë `(github_id, udhetimi_id)` pengon kopjet.
@@ -126,9 +141,9 @@ Në Vercel përdor **Root Directory: aplikacioni** dhe shto `DATABASE_URL` te En
 - `/udhetimi/3` ka zero vende dhe buton të çaktivizuar.
 - `/udhetimi/99` shfaq **Udhëtimi nuk u gjet** dhe lidhjen për te lista.
 
-Kërkesa për vend mbetet simulim, pa rezervim real ose pagesa. Versioni aktual shton Neon dhe hyrjen me GitHub.
+Rrjedha e mësipërme përshkruan versionin e Javës 3. Nga Java 10 kërkesa ruhet dhe pranohet realisht në databazën e provës; udhëzimet e konfigurimit janë në seksionin e Javës 10. Pagesat nuk janë përfshirë.
 
-Kodi Next.js është në `aplikacioni/src/`; worker-i, lexuesi offline dhe ikonat janë në `aplikacioni/public/`. Raportet `java-02.md` deri te `java-06.md` ruhen këtu, pranë README-së. Raportet e mëparshme përshkruajnë versionet e atyre javëve.
+Kodin Next.js e mbaj në `aplikacioni/src/`; worker-in, lexuesin offline dhe ikonat në `aplikacioni/public/`. Raportet `java-02.md` deri te `java-10.md` i ruaj këtu, pranë README-së. Në raportet e mëparshme përshkruaj versionet e atyre javëve.
 
 ## Kontrolli
 

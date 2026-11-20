@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { gjejUdhetimin } from "@/lib/udhetimet";
 import Vendtakimi from "@/components/Vendtakimi";
+import GjendjaUdhetimit from "@/components/GjendjaUdhetimit";
 
 export const dynamic = "force-dynamic";
 
@@ -29,16 +30,8 @@ export default async function Detajet({
       <h1>{udhetim.nisja} – {udhetim.destinacioni}</h1>
       <p>Ora: {udhetim.ora}</p>
       <p>Vendtakimi: {udhetim.vendtakimi}</p>
-      <p>Vende të lira: {udhetim.vende}</p>
-      <Vendtakimi key={id} />
-      {udhetim.vende > 0 ? (
-        <>
-          <p>Kjo është vetëm provë: nuk rezervohet vend dhe nuk njoftohet shoferi.</p>
-          <Link className="action" href={`/udhetimi/${id}/kerkesa`}>
-            Provo kërkesën · simulim
-          </Link>
-        </>
-      ) : <button className="action" disabled>Nuk ka vende të lira</button>}
+      <GjendjaUdhetimit key={`gjendja-${id}`} id={id} />
+      <Vendtakimi key={`vendtakimi-${id}`} />
     </main>
   );
 }

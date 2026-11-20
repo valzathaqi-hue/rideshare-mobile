@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "RideShare · Udhëtimet për AAB",
-  description: "Projekt universitar me tri udhëtime fiktive dhe kërkesë të simuluar për vend.",
+  description: "Projekt universitar me udhëtime fiktive, kërkesa dhe përditësim automatik të gjendjes.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

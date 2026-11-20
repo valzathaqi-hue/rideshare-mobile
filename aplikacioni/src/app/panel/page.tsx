@@ -60,7 +60,7 @@ export default async function Panel({ searchParams }: {
         <p>Si udhëtar mund të shohësh udhëtimet; nuk mund të ndryshosh orën e shoferit.</p>
       )}
       <p><Link href="/">Kthehu te udhëtimet</Link></p>
-      <p>Kërkesa për vend mbetet simulim këtë javë.</p>
+      <p>Kërkesat dhe pranimi shfaqen te <Link href="/udhetimi/2">detajet e udhëtimit 2</Link>. Serveri kontrollon rolin dhe pronarin.</p>
     </main>
   );
 }
